@@ -176,7 +176,7 @@
                 <i class="bi bi-linkedin" style="font-size: 24px;"></i>
               </a>
 
-              <a style="padding: 8px 15px;" class="btn btn-warning me-3 btn-lg" href="https://wa.me/+923142207370"
+              <a style="padding: 8px 15px;" class="btn btn-warning me-3 btn-lg" href="https://wa.me/+447355516661"
                 target="_blank" role="button" style="margin-top: 10px;"><i class="bi bi-whatsapp"
                   style="font-size: 24px;"></i></a>
               <!-- <<a style="color: 970c0c;" class="btn btn-link text-warning fw-medium" href="https://wa.me/+923142207370"
@@ -358,7 +358,7 @@
             <br>
 
           </div>
-          <div class="col-md-6 text-end"><img class="pt-7 pt-md-0 img-fluid" src="assets/img/hero/3.png" alt="" /></div>
+          <div class="col-md-6 text-end"><img class="pt-7 pt-md-0 img-fluid" src="assets/img/hero/4.PNG" alt="" /></div>
         </div>
         <div class="text-center"><a class="btn btn-warning" href="https://calendly.com/spideryoutube" role="button">BOOK
             MEETING</a></div>
@@ -420,7 +420,7 @@
     <section style="background-color: rgb(252, 252, 252);">
       <div class="container">
         <center style="background-color: rgb(186, 56, 56); color: #ffff;"><u>
-            <p style="margin-bottom: -20px; padding: 10px;">Here are some samples of our YouTube Edited Videos</p>
+            <p style="margin-bottom: -20px; padding: 10px;">Here are some samples of our YouTube Edited Shorts</p>
           </u></center><br><br>
         <div class="row"
           style="box-sizing: border-box; border: #c93030 solid 1.5px; border-radius: 40px; background-color: rgb(255, 249, 249);">
@@ -428,7 +428,7 @@
 
           <div class="col-lg-4">
             <div class="ratio ratio-1x1">
-              <iframe src="https://www.youtube.com/embed/edq7mkDw5qw" title="YouTube video" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/7REt7cRQYMQ" title="YouTube video" allowfullscreen></iframe>
             </div>
           </div>
 
@@ -487,10 +487,11 @@
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center">
             <h1 class="fw-bold mb-4 fs-7">Need a Video Editor?</h1>
-            <p class="mb-5 text-info fw-medium">Do you require some help for your project: Conception
-              workshop,<br />prototyping, marketing strategy?</p>
-            <a href="https://calendly.com/spideryoutube"><button class="btn btn-warning btn-md">Contact our
-                expert</button></a>
+            <p class="mb-5 text-info fw-medium">"Hoping to find a video editing pro who understands your brand's
+              aesthetic?"
+            </p>
+            <a href="https://calendly.com/spideryoutube"><button class="btn btn-warning btn-md">Book your
+                Meeting</button></a>
           </div>
         </div>
       </div><!-- end of .container-->
@@ -807,7 +808,8 @@
             <ul class="list-unstyled mb-0">
               <li class="mb-1"><a class="link-900 text-secondary text-decoration-none" href="#!">Disclaimer</a></li>
               <li class="mb-1"><a class="link-900 text-secondary text-decoration-none" href="#!">Financing</a></li>
-              <li class="mb-1"><a class="link-900 text-secondary text-decoration-none" href="#!">Privacy Policy</a>
+              <li class="mb-1"><a 
+                class="link-900 text-secondary text-decoration-none" href="#!">Privacy Policy</a>
               </li>
               <li class="mb-1"><a class="link-900 text-secondary text-decoration-none" href="#!">Terms of Service</a>
               </li>
@@ -833,17 +835,17 @@
 
     <!-- ============================================-->
     <!-- <section> begin ============================-->
-    <section class="text-center py-0">
+    <section class="text-center py-0" style="background-color: #970c0c; color: #ffff;">
 
       <div class="container">
         <div class="container border-top py-3">
           <div class="row justify-content-between">
             <div class="col-12 col-md-auto mb-1 mb-md-0">
-              <p class="mb-0">&copy; 2024 Your Company Inc </p>
+              <p class="mb-0">&copy; 2024 Spider Studio | All rights reserved </p>
             </div>
             <div class="col-12 col-md-auto">
               <p class="mb-0">
-                Made with<span class="fas fa-heart mx-1 text-danger"> </span>by <a style="color: blue;"
+                Made with<span class="fas fa-heart mx-1 text-danger"> </span>by <a style="color: rgb(0, 140, 255);"
                   class="text-decoration-none ms-1" href="https://wa.me/+923090506646" target="_blank">Muhammad Hammad
                 </a></p>
             </div>
@@ -909,26 +911,43 @@
   <!-- Counter -->
 
   <script>
-    const counters = document.querySelectorAll('.count');
+    // Function to update each counter
+    const updateCount = (counter, target, increment) => {
+      const count = +counter.innerText;
 
-    counters.forEach(counter => {
-      const updateCount = () => {
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(() => updateCount(counter, target, increment), 50);
+      } else {
+        counter.innerText = target;
+      }
+    };
+
+    // Function to start all counters
+    const startCounters = () => {
+      const counters = document.querySelectorAll('.count');
+      counters.forEach(counter => {
         const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText;
-
         const increment = target / 100;
+        updateCount(counter, target, increment);
+      });
+    };
 
-        if (count < target) {
-          counter.innerText = Math.ceil(count + increment);
-          setTimeout(updateCount, 50);
-        } else {
-          counter.innerText = target;
+    // Intersection Observer to detect when the section comes into view
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          startCounters();
+          observer.unobserve(entry.target);
         }
-      };
-
-      updateCount();
+      });
     });
+
+    // Observe the section containing the counters
+    const section = document.querySelector('.counter-container');
+    observer.observe(section);
   </script>
+
 
 
   <!-- <script>
